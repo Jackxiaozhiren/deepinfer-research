@@ -40,3 +40,23 @@ Entries are dated. Never edit or delete an existing entry; corrections are new e
   - Flip-condition demonstrations (N5): h 0.97→0.973 puts mean at 3.3222 with five rows out of band; h→0.96 puts mean at 3.2451 (both red). Mutant tests assert the EMIT_BONUS=0 control fires; the emission-accounting mutant shows 6→5 tokens/step.
   - Suite: 12/12 passed in 1.04 s (`.venv/bin/python -m pytest tests/ -v`).
 - Next: Lane L2 (§7.2) picks up from the frozen L1 constants. User note 4 (2026-10-22, pre-planted for L2, hand-computed — L2 must re-verify mechanically): the anchor table's throughput ratios exclude the pure-linear cost family T(v)=a+b·v; conc-16 implies a≈58b, substituted at conc-96 the linear family predicts T(5)/T(3.24)≈1.029 while the anchor requires 1.162 — contradictory under both the k and k+1 readings of the accepted-length statistic. L2's main cost family must be T(v)=a+b·v^c, and L2 adds `test_linear_family_excluded_by_anchor_ratios` as a negative control: the linear family must FAIL that test; if it passes, the checker is miscalibrated.
+
+## 2026-10-22 — Lane L2 session start / §4 baseline capture (entry 4)
+
+- Baseline: GREEN — all nine §4 commands ran with exit code 0; zero deviations from the §4 green criteria. Tree had moved since entry 3 exactly by the L1 commit (below), nothing unaccounted.
+- Did: ran the §4 first-commands in order. Exact outputs (each rc 0):
+  - `git rev-parse --short HEAD` → `c6d5a21`
+  - `git status --short` → 0 lines
+  - `.venv/bin/python --version` → `Python 3.12.14`
+  - `.venv/bin/python -c "import numpy, pytest; print(numpy.__version__, pytest.__version__)"` → `2.5.4 9.1.1`
+  - `.venv/bin/python dflash_alloc.py` → `PASS fixture1 prefix-strict: seqlens_q=[3, 1] (sum=4)` / `PASS fixture2 fresh-gets-one: seqlens_q=[1, 3] (sum=4)` / `PASS fixture3 zero-rate-wins-under-slack: seqlens_q=[2, 3] (sum=5)` / `PASS fixture4 no-slack: seqlens_q=[1, 1, 1] (sum=3)` / `all fixtures passed`
+  - `test -f /Users/jackson/DeepInfer/doc/inference_deployment_qa.md` → rc 0
+  - `test -f /Users/jackson/DeepInfer/deepinfer/model_executor/layers/tilelang_ops/schedule_mtp_varlen.py` → rc 0
+  - `git -C /Users/jackson/DeepInfer rev-parse --short HEAD` → `9bd9cf2`
+  - `git -C /Users/jackson/DeepInfer status --short` → 0 lines
+- L1 review ratification (recorded verbatim from the user's 2026-10-22 message):
+  - "L1 independently re-verified: suite 12/12; frozen constants reproduce bit-for-bit (base mean 3.3042 in band; mutant mean 3.3306, all six rows above band top); tree clean at c6d5a21; clone untouched at 9bd9cf2. All three declared deviations (stratified type composition, uncapped progress term with declared horizon, tightened mutant acceptance) are ratified."
+  - "Report hygiene: the L1 chat report's command table contained a bare `python -c` row; bare python does not exist on this machine, so that row was shorthand, not the command run. Your §9 command table must name every command exactly as executed, full path included."
+  - "L2 sensitivity addition (within §7.2's existing sweep mandate, not new scope): PROGRESS_DECAY and the heterogeneity level are design-driven, not empirical — include both as sweep axes, so the dynamic-vs-fixed sign conclusion is shown robust across the PROGRESS_DECAY range where the mutant stays red and across heterogeneity levels, not only at the frozen point."
+- Found: green criteria satisfied — research repo clean at `c6d5a21` (L1 deliverables commit); Python 3.12.14 with numpy 2.5.4 + pytest 9.1.1; `dflash_alloc.py` 4/4 fixtures PASS; clone `9bd9cf2` clean (N1 intact); no new dependencies (N2 intact).
+- Next: Lane L2 (§7.2) only. Per §6 hard gate: implementation triage presented to the user for approval BEFORE any L2 source file is written. No approval inherited from the L1 session.
