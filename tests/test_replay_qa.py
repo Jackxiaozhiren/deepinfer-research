@@ -70,3 +70,43 @@ def test_committed_sign_map_counts():
     text = (REPO_ROOT / "results" / "sweep_l2.md").read_text(encoding="utf-8")
     counts = replay_qa.count_sign_map_rows(text)
     assert counts == {"t_pow": 75, "saturation": 30}, f"committed sign-map counts changed: {counts}"
+
+
+def test_slice_guard_rejects_wrong_and_accepts_frozen():
+    """Criterion: check_slice passes the frozen slice and exits loudly on any
+    other — both directions asserted (an honest input must pass).
+
+    Why: score re-derives the slice and refuses to run against a ledger value
+    that disagrees with the rule. Flip: a guard that accepts wrong slices or
+    rejects the frozen one.
+    """
+    replay_qa.check_slice(FROZEN_SLICE, FROZEN_SLICE)
+    try:
+        replay_qa.check_slice(FROZEN_SLICE, (465.0, 1.1))
+    except SystemExit as exc:
+        assert exc.code == 1
+    else:
+        raise AssertionError("check_slice accepted a slice that is not the frozen one")
+
+
+def test_m1_report_structure_and_counts():
+    """Criterion: results/m1_report.md carries the five mandated sections, the
+    exact accepted/verified tension construction (ruling 2), and sign-map
+    counts equal to the committed artifact's (ruling 1).
+
+    Flip: a section removal, a bare-ratio restatement of the tension, or a
+    count that no longer matches the parsed committed map.
+    """
+    text = (REPO_ROOT / "results" / "m1_report.md").read_text(encoding="utf-8")
+    for marker in (
+        "## 1. Convention derivation summary",
+        "## 2. Calibration table",
+        "## 3. Replay table (frozen slice)",
+        "## 4. Sensitivity summary — where the family reproduces the anchor's sign flip",
+        "## 5. What this does NOT prove",
+        "3.15/3.24 = 0.9722",
+        "2.656/3.240 = 0.8198",
+        "75 t_pow cost points",
+        "30 saturation points",
+    ):
+        assert marker in text, f"results/m1_report.md lost marker: {marker}"
