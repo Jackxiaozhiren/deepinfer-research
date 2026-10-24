@@ -228,3 +228,20 @@ Entries are dated. Never edit or delete an existing entry; corrections are new e
 - Ruling 5 closing checks: default suite 38 passed / 1 deselected in 9.94 s; slow pin 1 passed in 20.01 s (durations recorded).
 - **Milestone 2 closes** per §5.3 DoD: report committed, suite green, ledger complete, all work committed by explicit path.
 - Next: Milestone 3 is PROPOSED, not started (Ruling 5 of the M2-L1 acceptance and M2 §5.3): (a) FDR-style selective verification — treat verified-but-rejected slots as false discoveries, bound the wasted-verification fraction across steps, operating points taken from the M2 tau thresholds; (b) ZOS staleness regret (allocate on the previous step's rates; remap-semantics work). Recommendation: (a) first. The user and a review session decide; no work begins without a new handoff and triage.
+
+## 2026-10-24 — Milestone-S lane MS-L1 session start / §4 baseline capture (entry 15)
+
+- Baseline: GREEN — all nine §4 commands ran with exit code 0; zero red criteria. One documented-state staleness noted below (not a red criterion).
+- Did: ran the §4 first-commands in order in `/Users/jackson/deepinfer-research`. Exact outputs (each rc 0):
+  - `git rev-parse --short HEAD` → `20fbcb1`
+  - `git status --short` → 0 lines
+  - `.venv/bin/python --version` → `Python 3.12.14`
+  - `.venv/bin/python -c "import numpy, pytest; print(numpy.__version__, pytest.__version__)"` → `2.5.4 9.1.1`
+  - `.venv/bin/python dflash_alloc.py` → `PASS fixture1 prefix-strict: seqlens_q=[3, 1] (sum=4)` / `PASS fixture2 fresh-gets-one: seqlens_q=[1, 3] (sum=4)` / `PASS fixture3 zero-rate-wins-under-slack: seqlens_q=[2, 3] (sum=5)` / `PASS fixture4 no-slack: seqlens_q=[1, 1, 1] (sum=3)` / `all fixtures passed`
+  - `test -f /Users/jackson/DeepInfer/doc/inference_deployment_qa.md` → rc 0
+  - `test -f /Users/jackson/DeepInfer/deepinfer/model_executor/layers/tilelang_ops/schedule_mtp_varlen.py` → rc 0
+  - `git -C /Users/jackson/DeepInfer rev-parse --short HEAD` → `9bd9cf2`
+  - `git -C /Users/jackson/DeepInfer status --short` → 0 lines
+- State staleness noted (N9, not a §4 red criterion): HANDOFF_PROMPT_MS.md §3 pins the research repo at `be55c16`; actual HEAD is `20fbcb1`. `git log` shows `20fbcb1` = "Add Milestone-S handoff: synthesis and public writeup lane", a direct child of `be55c16` whose diff is +86 lines across only `HANDOFF_PROMPT_MS.md` and `OPENERS_MS.md` (verified with `git diff --stat be55c16 20fbcb1`). No source, artifact, or ledger file changed, so the M1/M2 committed sources of truth are exactly as §3 describes; the handoff commit post-dates the writing of §3. §4's green criteria ("HEAD resolves to a commit", "status prints zero lines") are both satisfied.
+- Found: green criteria satisfied — research repo clean at `20fbcb1`; Python 3.12.14 with numpy 2.5.4 + pytest 9.1.1; `dflash_alloc.py` 4/4 fixtures PASS; clone `9bd9cf2` clean and untouched (N1 intact); no new dependencies (N2 intact). Ledger pre-session length: 14 entries.
+- Next: the §6 triage stop applies to this lane (MS §1). Present the WRITEUP.md outline, the Outcomes-section structure, and the derived-number guard design (`tests/test_writeup_numbers.py` + its generator and frozen fixture), then wait for approval before writing any file. After approval: append the Outcomes section to `research_DeepInfer_20261022.md`, create `WRITEUP.md`, build the guard with its N5 mutant, run the dual suites with durations, and land the outcome entry.
