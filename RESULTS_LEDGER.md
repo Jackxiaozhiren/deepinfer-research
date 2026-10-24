@@ -127,3 +127,20 @@ Entries are dated. Never edit or delete an existing entry; corrections are new e
   - Calibration: mean 3.3042, all rows in band — SATISFIED (report section 2), bit-identical to entries 3/5.
 - Milestone 1 closes per §7.3 DoD: `results/m1_report.md` committed with the five mandated sections; suite green; ledger complete; all work committed by explicit path. No re-freeze was needed (no scoring outcome influenced the frozen slice; the prediction in entry 7 was confirmed, not tuned toward).
 - Next: Milestone 2 (not started, per ruling 6). Proposals with priorities in the session report: ranking-error injection (rank-sufficiency quantification), ZOS staleness regret, FDR-style selective-verification wrapper — each builds directly on this harness.
+
+## 2026-10-24 — Milestone-2 Lane M2-L1 session start / §4 baseline capture (entry 9)
+
+- Baseline: GREEN — all nine §4 commands ran with exit code 0; zero deviations from the §4 green criteria. Tree had moved since entry 8 exactly by one commit (`c85d333` "Add Milestone-2 handoff: rank-sufficiency study lanes and openers"), nothing unaccounted.
+- Did: ran the §4 first-commands in order. Exact outputs (each rc 0):
+  - `git rev-parse --short HEAD` → `c85d333`
+  - `git status --short` → 0 lines
+  - `.venv/bin/python --version` → `Python 3.12.14`
+  - `.venv/bin/python -c "import numpy, pytest; print(numpy.__version__, pytest.__version__)"` → `2.5.4 9.1.1`
+  - `.venv/bin/python dflash_alloc.py` → `PASS fixture1 prefix-strict: seqlens_q=[3, 1] (sum=4)` / `PASS fixture2 fresh-gets-one: seqlens_q=[1, 3] (sum=4)` / `PASS fixture3 zero-rate-wins-under-slack: seqlens_q=[2, 3] (sum=5)` / `PASS fixture4 no-slack: seqlens_q=[1, 1, 1] (sum=3)` / `all fixtures passed`
+  - `test -f /Users/jackson/DeepInfer/doc/inference_deployment_qa.md` → rc 0
+  - `test -f /Users/jackson/DeepInfer/deepinfer/model_executor/layers/tilelang_ops/schedule_mtp_varlen.py` → rc 0
+  - `git -C /Users/jackson/DeepInfer rev-parse --short HEAD` → `9bd9cf2`
+  - `git -C /Users/jackson/DeepInfer status --short` → 0 lines
+- Correction note (Ruling A of HANDOFF_PROMPT_M2.md §5.1, recorded per N7; corrects ledger entry 7 without editing it): entry 7 displays the selection target as "4816/4891 − 1 = −0.0153363"; the exact value is **75/4891 = −0.0153343** (4891 − 4816 = 75; 75/4891 = 0.01533428...). The code (`FROZEN_TARGET = ANCHOR[16][4] / ANCHOR[16][3] - 1.0` in sim/replay_qa.py) always computed the ratio directly, so NO selection was affected — the argmin margins are 0.0716pp (chosen point) vs 0.0726pp (runner-up) as stated in Ruling A, re-verified numerically in this session's triage probes.
+- Found: green criteria satisfied — research repo clean at `c85d333`; Python 3.12.14 with numpy 2.5.4 + pytest 9.1.1; `dflash_alloc.py` 4/4 fixtures PASS; clone `9bd9cf2` clean (N1 intact); no new dependencies (N2 intact).
+- Next: Milestone-2 Lane M2-L1 (HANDOFF_PROMPT_M2.md §5.1) only. Per §6 hard gate: implementation triage — including the noise-mechanism choice, the generator-variant decision with pre-computed Ruling-D diagnostics, and the seed-composition plan — presented to the user for approval BEFORE any source file is written. No approval inherited from previous sessions.
