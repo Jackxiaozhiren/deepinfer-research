@@ -195,3 +195,21 @@ Entries are dated. Never edit or delete an existing entry; corrections are new e
   - V1-vs-V2 ratio diagnostic: V2E − V1 peaks at +0.0549 to +0.0580 (σ ≈ 0.05-0.2, concs 72/96) and vanishes (|Δ| ≤ 0.0054) at the plateau — the ranking advantage of sharper separation is a LOW-NOISE-REGIME phenomenon; under near-total scrambling both generators converge to the same scrambled-window behavior.
 - Ruling 3 closing checks: default suite 34 passed / 1 deselected in 12.84 s; slow pin 1 passed in 27.88 s (durations recorded).
 - Next: Lane M2-L3 (§5.3): `results/m2_report.md` with the five mandated sections; the M1-tension residual attribution with V1 and V2E side by side (Ruling 5 of the M2-L1 acceptance); counts derivable from committed artifacts; the auditable-bound statement in its measured scope; Milestone-3 proposal only (FDR-style selective verification on top of the ranking results, or ZOS staleness as the alternative).
+
+## 2026-10-24 — Milestone-2 Lane M2-L3 session start / §4 baseline capture (entry 13)
+
+- Baseline: GREEN — all nine §4 commands ran with exit code 0; zero deviations. Tree unchanged since entry 12's commit (`3019256`).
+- Did: ran the §4 first-commands in order. Exact outputs (each rc 0):
+  - `git rev-parse --short HEAD` → `3019256`
+  - `git status --short` → 0 lines
+  - `.venv/bin/python --version` → `Python 3.12.14`
+  - `.venv/bin/python -c "import numpy, pytest; print(numpy.__version__, pytest.__version__)"` → `2.5.4 9.1.1`
+  - `.venv/bin/python dflash_alloc.py` → `PASS fixture1 prefix-strict: seqlens_q=[3, 1] (sum=4)` / `PASS fixture2 fresh-gets-one: seqlens_q=[1, 3] (sum=4)` / `PASS fixture3 zero-rate-wins-under-slack: seqlens_q=[2, 3] (sum=5)` / `PASS fixture4 no-slack: seqlens_q=[1, 1, 1] (sum=3)` / `all fixtures passed`
+  - `test -f /Users/jackson/DeepInfer/doc/inference_deployment_qa.md` → rc 0
+  - `test -f /Users/jackson/DeepInfer/deepinfer/model_executor/layers/tilelang_ops/schedule_mtp_varlen.py` → rc 0
+  - `git -C /Users/jackson/DeepInfer rev-parse --short HEAD` → `9bd9cf2`
+  - `git -C /Users/jackson/DeepInfer status --short` → 0 lines
+- M2-L2 acceptance recorded (Rulings 1-5 of the user's 2026-10-24 message, summarized; the full text governs): (1) report-precision fixes land in m2_report.md §3 — regime-stratified tau-half ranges with named exception cells (V1 conc-96 @ (1550.0, 1.3) = 0.331; V2E same cell = 0.284), FINDING count corrected to 24 (18 V1 + 6 V2E), and the ideal-gain multiplier claim stated row-by-row with both values; (2) the auditable bound is a per-(conc, regime) measured statement conditioned on one noise realization; (3) the tension diagnosis: ranking quality necessary but not sufficient, residual attributed to rate separation + depth profile, V1/V2E side by side, conc-16 sign region answered; (4) the rate-space upgraded argument in §2 (probability-constrained head ⇒ within-sequence monotone predicted cumprods ⇒ the tau_K floor is a real production property; reachable ranking-quality band = [per-conc plateau, 1]); (5) counts discipline, dual suite runs with durations, Milestone-3 proposal only.
+- Correction note (N7; corrects ledger entry 12 without editing it): entry 12 states "V2E's ideal-band gains are 5-26× larger"; the per-row σ=0 ratios (V2E/V1, both-positive rows) are: primary slice — conc 32: 4.22/0.16 = 26.4×, conc 48: 7.49/3.63 = 2.1×, conc 60: 9.23/4.99 = 1.9×, conc 72: 11.04/6.09 = 1.8×, conc 96: 14.27/9.17 = 1.6×; band-edge slice — conc 48: 7.49/3.50 = 2.1×, conc 96: 14.27/8.94 = 1.6×; second regime — conc 32: 4.99/0.74 = 6.7×, conc 48: 9.10/5.05 = 1.8×, conc 60: 12.16/7.62 = 1.6×, conc 72: 15.59/10.19 = 1.5×, conc 96: 20.25/14.64 = 1.4×. **Only the two conc-32 rows reach 6.7-26.4×; every other positive row is 1.4-2.1×.** m2_report.md states the multipliers row-by-row (Ruling 1c).
+- Found: green criteria satisfied — research repo clean at `3019256`; Python 3.12.14 with numpy 2.5.4 + pytest 9.1.1; `dflash_alloc.py` 4/4 fixtures PASS; clone `9bd9cf2` clean (N1 intact); no new dependencies (N2 intact).
+- Next: build `results/m2_report.md` from the committed `results/sweep_m2.md` via a parsing builder (counts derived from the committed artifact), guarded by tests; then the closing dual suite runs and the outcome entry closing Milestone 2.
