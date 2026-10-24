@@ -156,3 +156,27 @@ Entries are dated. Never edit or delete an existing entry; corrections are new e
 - τ=0 pin evidence: bit-identity of both arms' k arrays against allocator.simulate_pair at all six anchor concs; the (465.0, 1.1) paired gains reproduce the committed sign-map row exactly ({16: −0.05, 32: +0.16, 48: +3.63, 60: +4.99, 72: +6.09, 96: +9.17}); the pin also passes on the adopted V2E levels.
 - Did: wrote `sim/rank_noise.py` (perturbed_rates, kendall_tau + independent brute-force reference, simulate_pair_noisy with per-arm trajectories, k_true_prefix diagnostic, degradation_check, NOISE_SEED = 20261201 drawn after the u block, shared z across σ and arms), `tests/test_rank_noise.py` (8 tests), `pytest.ini` (slow-marker infrastructure). Process notes, recorded honestly: two test-construction errors of mine were caught by the machinery and fixed — a numpy bool-subtract TypeError in the brute-force reference, and TWO wrong hand expectations (the tied-case τ_b is +0.5, not −0.5 — re-derived: pair (0,2) concordant, pairs (0,1)/(1,2) tie-deflated; and the reversed-array extreme τ(x, x[::-1]) = −0.61 is correct behavior, τ(x, −x) = −1 is the true anti-monotone extreme). Also fixed during development: the noisy loop initially advanced both arms on the fixed arm's progress trajectory — caught before any test run by re-checking against allocator._run_arm's per-arm semantics.
 - Next: Lane M2-L2 (§5.2). Declare the cost slices (primary (465.0, 1.1); sensitivity {(476.45, 1.1), (1550.0, 1.3)}) in the ledger before sweeping; run the 10-point σ grid × 6 concs × anchor-matched budgets × 12 seeds on V1 (continuity anchor) and V2E (primary); report gain-vs-τ_K curves, the τ_K calibration, per-conc τ*/τ½ thresholds with flip conditions, and the V1-vs-V2 ratio diagnostic; any non-monotonicity is a finding.
+
+## 2026-10-24 — Milestone-2 Lane M2-L2 session start / §4 baseline capture (entry 11)
+
+- Baseline: GREEN — all nine §4 commands ran with exit code 0; zero deviations. Tree unchanged since entry 10's commit (`ec0d22b`).
+- Did: ran the §4 first-commands in order. Exact outputs (each rc 0):
+  - `git rev-parse --short HEAD` → `ec0d22b`
+  - `git status --short` → 0 lines
+  - `.venv/bin/python --version` → `Python 3.12.14`
+  - `.venv/bin/python -c "import numpy, pytest; print(numpy.__version__, pytest.__version__)"` → `2.5.4 9.1.1`
+  - `.venv/bin/python dflash_alloc.py` → `PASS fixture1 prefix-strict: seqlens_q=[3, 1] (sum=4)` / `PASS fixture2 fresh-gets-one: seqlens_q=[1, 3] (sum=4)` / `PASS fixture3 zero-rate-wins-under-slack: seqlens_q=[2, 3] (sum=5)` / `PASS fixture4 no-slack: seqlens_q=[1, 1, 1] (sum=3)` / `all fixtures passed`
+  - `test -f /Users/jackson/DeepInfer/doc/inference_deployment_qa.md` → rc 0
+  - `test -f /Users/jackson/DeepInfer/deepinfer/model_executor/layers/tilelang_ops/schedule_mtp_varlen.py` → rc 0
+  - `git -C /Users/jackson/DeepInfer rev-parse --short HEAD` → `9bd9cf2`
+  - `git -C /Users/jackson/DeepInfer status --short` → 0 lines
+- Correction note (Ruling 2 of the M2-L1 acceptance, recorded per N7; corrects ledger entry 10 without editing it): entry 10 states "8 tests" for tests/test_rank_noise.py; the file defines **7 test functions** (6 fast + 1 slow-marked). Collection arithmetic: 28 (M1) + 7 = 35 collected = 34 passed + 1 deselected, consistent with the per-file counts 6/8/3/7/4/7 (allocator_integration/convention/cost_model/rank_noise/rates_calibration/replay_qa). Report counts must match.
+- M2-L2 declarations (recorded BEFORE any sweep consumes them, per Ruling 6 / §5.2):
+  - Cost slices: **primary (a/b, c) = (465.0, 1.1)**; sensitivity set **{(476.45, 1.1) (the committed exact conc-32 flip — the band's edge), (1550.0, 1.3) (a second regime)}**. Gains per slice are analytic transforms of the shared simulations (the cost model enters only through the step-time ratio), so one simulation set serves all three slices.
+  - σ grid: the FULL 10-point grid {0, 0.05, 0.1, 0.2, 0.4, 0.8, 1.6, 3.2, 6.4, 12.8} for BOTH V1 and V2E — the reduced-V1 branch of Ruling 4 is NOT taken.
+  - Threshold semantics (Ruling 5): rows whose σ=0 gain is ≤ 0 have τ* = "n/a (negative at sigma=0)" and τ½ likewise undefined; no interpolation, no blanks. τ* = the first grid σ where the mean paired gain crosses zero; τ½ = the first grid σ where the mean paired gain drops below half its σ=0 value; both reported as (σ, τ_K at that σ).
+  - Non-monotonicity: EVERY adjacent grid increase in mean gain is recorded with magnitude and paired-difference CI; increases whose CI is wholly positive are non-monotonicity FINDINGS (N8).
+  - Plateau per conc: the τ_K value at σ = 12.8 recorded per (generator, conc).
+  - V1-vs-V2 diagnostic: the accepted/verified ratio difference (V2E − V1) per (conc, σ).
+- Found: green criteria satisfied — research repo clean at `ec0d22b`; Python 3.12.14 with numpy 2.5.4 + pytest 9.1.1; `dflash_alloc.py` 4/4 fixtures PASS; clone `9bd9cf2` clean (N1 intact); no new dependencies (N2 intact).
+- Next: write the sweep runner (`sim/sweep_m2.py`), run the full dual sweep in the background (2 generators × 10 σ × 6 concs × 12 seeds = 1440 paired sims), produce `results/sweep_m2.md`, then the closing suite runs (fast AND slow, durations recorded per Ruling 3) and the outcome entry.
