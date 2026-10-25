@@ -183,7 +183,9 @@ seed: generator seed 20261022, horizon 6000, paired seeds `L2_SWEEP_SEED + i` fo
 [0, 12), bootstrap seed 20261101 with 10000 resamples.
 
 ```bash
-git clone https://github.com/Jackxiaozhiren/deepinfer-research.git deepinfer-research && cd deepinfer-research
+git clone https://github.com/Jackxiaozhiren/deepinfer-research.git deepinfer-research
+cd deepinfer-research
+python3 -m venv .venv && .venv/bin/python -m pip install numpy==2.5.4 pytest==9.1.1
 .venv/bin/python dflash_alloc.py            # allocator port + hand-derived fixtures
 .venv/bin/python -m sim.sweep_l2            # sign map (75 t_pow + 30 saturation points)
 .venv/bin/python -m sim.sweep_m2            # ranking-noise sweep (1440 paired sims)
