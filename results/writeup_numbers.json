@@ -1,0 +1,950 @@
+{
+  "_generated_by": "sim/build_writeup_numbers.py",
+  "_note": "Every 'printed' string is regex-captured from a committed artifact. Regenerate: .venv/bin/python -m sim.build_writeup_numbers",
+  "entries": [
+    {
+      "key": "emit_convention",
+      "kind": "claim",
+      "printed": "k+1",
+      "tokens": [
+        "1"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": "## 1. Convention derivation summary",
+      "pattern": "emits \\*\\*(k\\+1)\\*\\* tokens",
+      "tier2": "EMIT_BONUS|accepted prefix|bonus"
+    },
+    {
+      "key": "calib_mean",
+      "kind": "claim",
+      "printed": "3.3042",
+      "tokens": [
+        "3.3042"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": "## 2. Calibration table",
+      "pattern": "mean = (\\d+(?:\\.\\d+)?)",
+      "tier2": null
+    },
+    {
+      "key": "anchor_gain16",
+      "kind": "claim",
+      "printed": "-1.5%",
+      "tokens": [
+        "1.5%"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": "## 3. Replay table (frozen slice)",
+      "pattern": "^\\| 16 \\| ([-+][\\d.]+%)",
+      "tier2": "conc\\S* ?16|\\banchor\\b"
+    },
+    {
+      "key": "anchor_gain96",
+      "kind": "claim",
+      "printed": "+11.0%",
+      "tokens": [
+        "11.0%"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": "## 3. Replay table (frozen slice)",
+      "pattern": "^\\| 96 \\| ([-+][\\d.]+%)",
+      "tier2": "conc\\S* ?96"
+    },
+    {
+      "key": "model_gain16",
+      "kind": "claim",
+      "printed": "-1.60%",
+      "tokens": [
+        "1.60%"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": "## 3. Replay table (frozen slice)",
+      "pattern": "^\\| 16 \\| [-+][\\d.]+% \\| - \\| ([-+][\\d.]+%) \\[",
+      "tier2": null
+    },
+    {
+      "key": "anchor_ratio96",
+      "kind": "claim",
+      "printed": "0.9722",
+      "tokens": [
+        "0.9722"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": "## 3. Replay table (frozen slice)",
+      "pattern": "= (0\\.9722)",
+      "tier2": "3\\.15/3\\.24"
+    },
+    {
+      "key": "model_ratio_v1",
+      "kind": "claim",
+      "printed": "0.8198",
+      "tokens": [
+        "0.8198"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": "## 3. Replay table (frozen slice)",
+      "pattern": "= (0\\.8198)",
+      "tier2": "V1"
+    },
+    {
+      "key": "calib_band_lo",
+      "kind": "claim",
+      "printed": "3.29",
+      "tokens": [
+        "3.29"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": "## 2. Calibration table",
+      "pattern": "mean across rows in \\[([\\d.]+),",
+      "tier2": null
+    },
+    {
+      "key": "calib_band_hi",
+      "kind": "claim",
+      "printed": "3.32",
+      "tokens": [
+        "3.32"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": "## 2. Calibration table",
+      "pattern": "mean across rows in \\[[\\d.]+, ([\\d.]+)\\]",
+      "tier2": "calibrat|fixed-5"
+    },
+    {
+      "key": "gen_verified_dyn16",
+      "kind": "claim",
+      "printed": "4.438",
+      "tokens": [
+        "4.438"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": "## 3. Replay table (frozen slice)",
+      "pattern": "^\\| 16 \\|.*\\| ([\\d.]+) \\| [\\d.]+ / [\\d.]+ \\|",
+      "tier2": "verif"
+    },
+    {
+      "key": "gen_acc_dyn16",
+      "kind": "claim",
+      "printed": "3.196",
+      "tokens": [
+        "3.196"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": "## 3. Replay table (frozen slice)",
+      "pattern": "^\\| 16 \\|.*\\| [\\d.]+ \\| ([\\d.]+) / ",
+      "tier2": null
+    },
+    {
+      "key": "gen_acc_fix16",
+      "kind": "claim",
+      "printed": "3.307",
+      "tokens": [
+        "3.307"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": "## 3. Replay table (frozen slice)",
+      "pattern": "^\\| 16 \\|.*\\| [\\d.]+ / ([\\d.]+) \\|",
+      "tier2": null
+    },
+    {
+      "key": "model_ci16",
+      "kind": "context",
+      "printed": "[-1.62, -1.59]",
+      "tokens": [
+        "1.59",
+        "1.62"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": "## 3. Replay table (frozen slice)",
+      "pattern": "-1\\.60% (\\[-1\\.62, -1\\.59\\])",
+      "tier2": null
+    },
+    {
+      "key": "conc16_inband_lo",
+      "kind": "claim",
+      "printed": "-0.05%",
+      "tokens": [
+        "0.05%"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": "## 4. Sensitivity summary — where the family reproduces the anchor's sign flip",
+      "pattern": "conc-16 lands at ([-\\d.]+%) to",
+      "tier2": "conc\\S* ?16"
+    },
+    {
+      "key": "conc16_inband_hi",
+      "kind": "claim",
+      "printed": "-0.37%",
+      "tokens": [
+        "0.37%"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": "## 4. Sensitivity summary — where the family reproduces the anchor's sign flip",
+      "pattern": "conc-16 lands at [-\\d.]+% to ([-\\d.]+%)",
+      "tier2": null
+    },
+    {
+      "key": "l2_tpow_points",
+      "kind": "claim",
+      "printed": "75",
+      "tokens": [
+        "75"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": "## 4. Sensitivity summary — where the family reproduces the anchor's sign flip",
+      "pattern": "evaluates (\\d+) t_pow cost points",
+      "tier2": "t_pow"
+    },
+    {
+      "key": "l2_sat_points",
+      "kind": "claim",
+      "printed": "30",
+      "tokens": [
+        "30"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": "## 4. Sensitivity summary — where the family reproduces the anchor's sign flip",
+      "pattern": "and (\\d+) saturation points",
+      "tier2": "saturation"
+    },
+    {
+      "key": "seed_gen",
+      "kind": "claim",
+      "printed": "seed 20261022, horizon 6000",
+      "tokens": [
+        "20261022",
+        "6000"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": "## 2. Calibration table",
+      "pattern": "(seed 20261022,\\s*horizon 6000)",
+      "tier2": null
+    },
+    {
+      "key": "seed_bootstrap",
+      "kind": "context",
+      "printed": "bootstrap seed 20261101, 10000 resamples; horizon 6000 steps",
+      "tokens": [
+        "10000",
+        "20261101",
+        "6000"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": null,
+      "pattern": "(bootstrap seed 20261101, 10000 resamples; horizon 6000 steps)",
+      "tier2": null
+    },
+    {
+      "key": "seed_i",
+      "kind": "context",
+      "printed": "i in [0, 12)",
+      "tokens": [
+        "0",
+        "12"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": null,
+      "pattern": "(i in \\[0, 12\\))",
+      "tier2": null
+    },
+    {
+      "key": "m1_title",
+      "kind": "context",
+      "printed": "Milestone 1 report",
+      "tokens": [
+        "1"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": null,
+      "pattern": "(Milestone 1 report)",
+      "tier2": null
+    },
+    {
+      "key": "fixed5",
+      "kind": "context",
+      "printed": "Fixed-5 accepted length k per concurrency row",
+      "tokens": [
+        "5"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": "## 2. Calibration table",
+      "pattern": "(Fixed-5 accepted length k per concurrency row)",
+      "tier2": null
+    },
+    {
+      "key": "l2_counts_ctx",
+      "kind": "context",
+      "printed": "(15 a/b values x 5 exponents) and 30 saturation points (10 x 3)",
+      "tokens": [
+        "10",
+        "15",
+        "3",
+        "30",
+        "5"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": "## 4. Sensitivity summary — where the family reproduces the anchor's sign flip",
+      "pattern": "\\(15 a/b values x 5 exponents\\) and 30 saturation points \\(10 x 3\\)",
+      "tier2": null
+    },
+    {
+      "key": "repro_cells",
+      "kind": "context",
+      "printed": "((465.0, 1.1), (1550.0, 1.3), (4900.0, 1.5)",
+      "tokens": [
+        "1.1",
+        "1.3",
+        "1.5",
+        "1550.0",
+        "465.0",
+        "4900.0"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": "## 4. Sensitivity summary — where the family reproduces the anchor's sign flip",
+      "pattern": "\\(\\(465\\.0, 1\\.1\\),\\s*\\(1550\\.0, 1\\.3\\), \\(4900\\.0, 1\\.5\\)",
+      "tier2": null
+    },
+    {
+      "key": "replay_concs",
+      "kind": "context",
+      "printed": "16 32 48 60 72 96",
+      "tokens": [
+        "16",
+        "32",
+        "48",
+        "60",
+        "72",
+        "96"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": "## 3. Replay table (frozen slice)",
+      "pattern": "^\\| (16|32|48|60|72|96) \\|",
+      "tier2": null
+    },
+    {
+      "key": "replay_rows",
+      "kind": "context",
+      "printed": "| 16 | -1.5% | - | -1.60% [-1.62, -1.59] | - | YES | 4.438 | 3.196 / 3.307 | | 32 | +1.6% | + | -6.10% [-6.12, -6.08] | - | NO | 3.656 | 2.882 / 3.307 | | 48 | +3.6% | + | -2.73% [-2.74, -2.72] | - | NO | 3.938 | 3.014 / 3.307 | | 60 | +5.4% | + | -4.50% [-4.51, -4.49] | - | NO | 3.583 | 2.848 / 3.308 | | 72 | +6.7% | + | -6.74% [-6.76, -6.71] | - | NO | 3.236 | 2.654 / 3.307 | | 96 | +11.0% | + | -5.00% [-5.01, -4.99] | - | NO | 3.240 | 2.656 / 3.307 |",
+      "tokens": [
+        "1.5%",
+        "1.59",
+        "1.6%",
+        "1.60%",
+        "1.62",
+        "11.0%",
+        "16",
+        "2.654",
+        "2.656",
+        "2.72",
+        "2.73%",
+        "2.74",
+        "2.848",
+        "2.882",
+        "3.014",
+        "3.196",
+        "3.236",
+        "3.240",
+        "3.307",
+        "3.308",
+        "3.583",
+        "3.6%",
+        "3.656",
+        "3.938",
+        "32",
+        "4.438",
+        "4.49",
+        "4.50%",
+        "4.51",
+        "4.99",
+        "48",
+        "5.00%",
+        "5.01",
+        "5.4%",
+        "6.08",
+        "6.10%",
+        "6.12",
+        "6.7%",
+        "6.71",
+        "6.74%",
+        "6.76",
+        "60",
+        "72",
+        "96"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": "## 3. Replay table (frozen slice)",
+      "pattern": "^\\| (?:16|32|48|60|72|96) \\| .*\\|$",
+      "tier2": null
+    },
+    {
+      "key": "calib_rows",
+      "kind": "context",
+      "printed": "16 3.3058 32 3.3007 48 3.3050 60 3.3036 72 3.3062 96 3.3040",
+      "tokens": [
+        "16",
+        "3.3007",
+        "3.3036",
+        "3.3040",
+        "3.3050",
+        "3.3058",
+        "3.3062",
+        "32",
+        "48",
+        "60",
+        "72",
+        "96"
+      ],
+      "artifact": "m1",
+      "artifact_path": "results/m1_report.md",
+      "heading": "## 2. Calibration table",
+      "pattern": "^\\| (16|32|48|60|72|96) \\| ([\\d.]+) \\|",
+      "tier2": null
+    },
+    {
+      "key": "m2_sims",
+      "kind": "context",
+      "printed": "1440 paired sims",
+      "tokens": [
+        "1440"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": null,
+      "pattern": "(1440 paired sims)",
+      "tier2": null
+    },
+    {
+      "key": "m2_title",
+      "kind": "context",
+      "printed": "Milestone 2 report",
+      "tokens": [
+        "2"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": null,
+      "pattern": "(Milestone 2 report)",
+      "tier2": null
+    },
+    {
+      "key": "plateau_v1_lo",
+      "kind": "claim",
+      "printed": "0.232",
+      "tokens": [
+        "0.232"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 2. Machinery, window-length semantics, and the reachable ranking-quality band",
+      "pattern": "V1 plateaus at ([\\d.]+)-",
+      "tier2": "V1"
+    },
+    {
+      "key": "plateau_v1_hi",
+      "kind": "claim",
+      "printed": "0.287",
+      "tokens": [
+        "0.287"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 2. Machinery, window-length semantics, and the reachable ranking-quality band",
+      "pattern": "V1 plateaus at [\\d.]+-([\\d.]+)",
+      "tier2": null
+    },
+    {
+      "key": "plateau_v2e_lo",
+      "kind": "claim",
+      "printed": "0.190",
+      "tokens": [
+        "0.190"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 2. Machinery, window-length semantics, and the reachable ranking-quality band",
+      "pattern": "V2E at ([\\d.]+)-",
+      "tier2": "V2E"
+    },
+    {
+      "key": "plateau_v2e_hi",
+      "kind": "claim",
+      "printed": "0.243",
+      "tokens": [
+        "0.243"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 2. Machinery, window-length semantics, and the reachable ranking-quality band",
+      "pattern": "V2E at [\\d.]+-([\\d.]+)",
+      "tier2": null
+    },
+    {
+      "key": "floor_band",
+      "kind": "claim",
+      "printed": "~0.19-0.29",
+      "tokens": [
+        "0.19",
+        "0.29"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 5. What this does NOT prove",
+      "pattern": "tau_K floor \\((~[\\d.]+-[\\d.]+)\\)",
+      "tier2": null
+    },
+    {
+      "key": "finding_cells",
+      "kind": "claim",
+      "printed": "24",
+      "tokens": [
+        "24"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
+      "pattern": "\\*\\*(\\d+) FINDING cells",
+      "tier2": null
+    },
+    {
+      "key": "finding_split",
+      "kind": "claim",
+      "printed": "18 V1 + 6 V2E",
+      "tokens": [
+        "1",
+        "18",
+        "2",
+        "6"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
+      "pattern": "\\((\\d+ V1 \\+ \\d+ V2E)\\)",
+      "tier2": null
+    },
+    {
+      "key": "finding_sigma",
+      "kind": "context",
+      "printed": "sigma 6.4 -> 12.8",
+      "tokens": [
+        "12.8",
+        "6.4"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
+      "pattern": "(sigma 6\\.4 -> 12\\.8)",
+      "tier2": null
+    },
+    {
+      "key": "tauhalf_v1_lo",
+      "kind": "claim",
+      "printed": "0.441",
+      "tokens": [
+        "0.441"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
+      "pattern": "\\*\\*V1 \\[([\\d.]+),",
+      "tier2": "V1"
+    },
+    {
+      "key": "tauhalf_v1_hi",
+      "kind": "claim",
+      "printed": "0.453",
+      "tokens": [
+        "0.453"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
+      "pattern": "\\*\\*V1 \\[[\\d.]+, ([\\d.]+)\\]\\*\\*",
+      "tier2": null
+    },
+    {
+      "key": "tauhalf_v2e_lo",
+      "kind": "claim",
+      "printed": "0.392",
+      "tokens": [
+        "0.392"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
+      "pattern": "\\*\\*V2E \\[([\\d.]+),",
+      "tier2": "V2E"
+    },
+    {
+      "key": "tauhalf_v2e_hi",
+      "kind": "claim",
+      "printed": "0.404",
+      "tokens": [
+        "0.404"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
+      "pattern": "\\*\\*V2E \\[[\\d.]+, ([\\d.]+)\\]\\*\\*",
+      "tier2": null
+    },
+    {
+      "key": "tauhalf_v2e_conc32",
+      "kind": "claim",
+      "printed": "0.545",
+      "tokens": [
+        "0.545"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
+      "pattern": "V2E conc-32 .*?tau_half = ([\\d.]+)",
+      "tier2": "conc\\S* ?32"
+    },
+    {
+      "key": "tauhalf_v1_conc32",
+      "kind": "claim",
+      "printed": "0.734",
+      "tokens": [
+        "0.734"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
+      "pattern": "V1 conc-32 \\(primary/band-edge\\): tau_half = ([\\d.]+)",
+      "tier2": "DEGENERATE|degenerate"
+    },
+    {
+      "key": "ideal_gain_v2e_conc32",
+      "kind": "claim",
+      "printed": "+4.38%",
+      "tokens": [
+        "4.38%"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
+      "pattern": "V2E conc-32 .*?larger ideal gain (\\+[\\d.]+%)",
+      "tier2": "V2E"
+    },
+    {
+      "key": "ideal_gain_v1_conc32",
+      "kind": "claim",
+      "printed": "+0.16%",
+      "tokens": [
+        "0.16%"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
+      "pattern": "V1 conc-32 .*?DEGENERATE: ideal gain (\\+[\\d.]+%)",
+      "tier2": "V1"
+    },
+    {
+      "key": "tauhalf_v2e_conc16",
+      "kind": "claim",
+      "printed": "0.444",
+      "tokens": [
+        "0.444"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
+      "pattern": "V2E conc-16 \\(all slices\\): tau_half = ([\\d.]+)",
+      "tier2": "conc\\S* ?16"
+    },
+    {
+      "key": "tauhalf_second_v1",
+      "kind": "claim",
+      "printed": "0.331",
+      "tokens": [
+        "0.331"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
+      "pattern": "V1 conc-96 \\(second regime\\): tau_half = ([\\d.]+)",
+      "tier2": "V1"
+    },
+    {
+      "key": "tauhalf_second_v2e",
+      "kind": "claim",
+      "printed": "0.284",
+      "tokens": [
+        "0.284"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
+      "pattern": "V2E conc-96 \\(second regime\\): tau_half = ([\\d.]+)",
+      "tier2": "V2E"
+    },
+    {
+      "key": "mult_lo",
+      "kind": "claim",
+      "printed": "6.7-27.4x",
+      "tokens": [
+        "27.4",
+        "6.7"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
+      "pattern": "only the two conc-32 rows reach ([\\d.-]+x)",
+      "tier2": null
+    },
+    {
+      "key": "mult_hi_band",
+      "kind": "claim",
+      "printed": "1.4-2.1x",
+      "tokens": [
+        "1.4",
+        "2.1"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
+      "pattern": "every other row is ([\\d.-]+x)",
+      "tier2": null
+    },
+    {
+      "key": "m2_concs",
+      "kind": "context",
+      "printed": "96 32 48 60 72 96 48 60 72 96 32 48 60 72 96",
+      "tokens": [
+        "32",
+        "48",
+        "60",
+        "72",
+        "96"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
+      "pattern": "conc (\\d+)",
+      "tier2": null
+    },
+    {
+      "key": "second_regime_gains",
+      "kind": "context",
+      "printed": "second conc 96: V2E +20.25% vs V1 +14.64% = 1.4x",
+      "tokens": [
+        "1",
+        "1.4",
+        "14.64%",
+        "2",
+        "20.25%",
+        "96"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
+      "pattern": "(second conc 96: V2E \\+20\\.25% vs V1 \\+14\\.64% = 1\\.4x)",
+      "tier2": null
+    },
+    {
+      "key": "model_ratio_v2e",
+      "kind": "claim",
+      "printed": "0.8747",
+      "tokens": [
+        "0.8747"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 4. M1-tension diagnosis — does ranking quality close the gap?",
+      "pattern": "V2E = (0\\.8747)",
+      "tier2": "V2E"
+    },
+    {
+      "key": "closure_gap_part",
+      "kind": "claim",
+      "printed": "0.0549",
+      "tokens": [
+        "0.0549"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 4. M1-tension diagnosis — does ranking quality close the gap?",
+      "pattern": "closed (0\\.\\d+) of the",
+      "tier2": null
+    },
+    {
+      "key": "closure_gap_total",
+      "kind": "claim",
+      "printed": "0.1524",
+      "tokens": [
+        "0.1524"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 4. M1-tension diagnosis — does ranking quality close the gap?",
+      "pattern": "of the (0\\.\\d+) gap",
+      "tier2": null
+    },
+    {
+      "key": "closure_pct",
+      "kind": "claim",
+      "printed": "36.0%",
+      "tokens": [
+        "36.0%"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 4. M1-tension diagnosis — does ranking quality close the gap?",
+      "pattern": "gap = \\*\\*(36\\.0%)\\*\\*",
+      "tier2": "V2E"
+    },
+    {
+      "key": "residual_pct",
+      "kind": "claim",
+      "printed": "64.0%",
+      "tokens": [
+        "64.0%"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 4. M1-tension diagnosis — does ranking quality close the gap?",
+      "pattern": "the residual (64\\.0%)",
+      "tier2": "36\\.0%|residual"
+    },
+    {
+      "key": "tension_anchor_pair",
+      "kind": "context",
+      "printed": "3.15/3.24",
+      "tokens": [
+        "3.15",
+        "3.24"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 4. M1-tension diagnosis — does ranking quality close the gap?",
+      "pattern": "(3\\.15/3\\.24)",
+      "tier2": null
+    },
+    {
+      "key": "tension_ideal_accept",
+      "kind": "context",
+      "printed": "accepting at ~0.87 of the verified length",
+      "tokens": [
+        "0.87"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 4. M1-tension diagnosis — does ranking quality close the gap?",
+      "pattern": "(accepting at ~0\\.87 of the verified length)",
+      "tier2": null
+    },
+    {
+      "key": "conc16_v1",
+      "kind": "claim",
+      "printed": "-0.05%",
+      "tokens": [
+        "0.05%"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 4. M1-tension diagnosis — does ranking quality close the gap?",
+      "pattern": "V1 ([-+][\\d.]+%) and",
+      "tier2": null
+    },
+    {
+      "key": "conc16_v2e",
+      "kind": "claim",
+      "printed": "+1.90%",
+      "tokens": [
+        "1.90%"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 4. M1-tension diagnosis — does ranking quality close the gap?",
+      "pattern": "and V2E (\\+[\\d.]+%)",
+      "tier2": "V2E"
+    },
+    {
+      "key": "retention_def",
+      "kind": "claim",
+      "printed": "50%",
+      "tokens": [
+        "50%"
+      ],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 5. What this does NOT prove",
+      "pattern": "retaining >= (\\d+%)",
+      "tier2": null
+    },
+    {
+      "key": "realization_claim",
+      "kind": "context",
+      "printed": "ONE noise realization",
+      "tokens": [],
+      "artifact": "m2",
+      "artifact_path": "results/m2_report.md",
+      "heading": "## 5. What this does NOT prove",
+      "pattern": "(ONE noise realization)",
+      "tier2": null
+    },
+    {
+      "key": "env_python",
+      "kind": "context",
+      "printed": "Python 3.12.14",
+      "tokens": [
+        "3.12.14"
+      ],
+      "artifact": "ledger",
+      "artifact_path": "RESULTS_LEDGER.md",
+      "heading": "## 2026-10-24 — Milestone-S lane MS-L1 session start / §4 baseline capture (entry 15)",
+      "pattern": "→ `(Python 3\\.12\\.14)`",
+      "tier2": null
+    },
+    {
+      "key": "env_versions",
+      "kind": "context",
+      "printed": "2.5.4 9.1.1",
+      "tokens": [
+        "2.5.4",
+        "9.1.1"
+      ],
+      "artifact": "ledger",
+      "artifact_path": "RESULTS_LEDGER.md",
+      "heading": "## 2026-10-24 — Milestone-S lane MS-L1 session start / §4 baseline capture (entry 15)",
+      "pattern": "→ `(2\\.5\\.4 9\\.1\\.1)`",
+      "tier2": null
+    }
+  ],
+  "exemptions": [
+    {
+      "token": "4.1",
+      "reason": "product identifier inside the model name V4.1-Flash (research_DeepInfer_20261022.md §7 sources)"
+    },
+    {
+      "token": "2.0",
+      "reason": "license identifier Apache-2.0 (upstream README, §7 sources)"
+    }
+  ]
+}

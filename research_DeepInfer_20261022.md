@@ -103,6 +103,8 @@ Grounds: (i) it extends the established research line "model scores → auditabl
 3. FDR-style selective-verification wrapper simulated on top of the same harness.
 4. Write-up: methodology-first artifact (interview-defensible: every number traceable to a frozen seed + pinned commit).
 
+> [Executed: milestones 1 and 2 completed and closed — see §10 Outcomes for the results, and `RESULTS_LEDGER.md` for the dated session history. Milestone 3 (FDR-style selective verification first, ZOS staleness second) remains a PROPOSAL only.]
+
 ## 7. Sources
 
 Primary (High confidence):
@@ -125,3 +127,19 @@ Secondary (Medium confidence):
 ## 9. Methodology
 
 Round 1: GitHub API metadata + org repo census + full clone. Round 2: targeted source reading (engine → worker → MTP/confidence chain → eval/tests). Round 3: background web agent (30 tool calls, HN/Reddit/Zhihu/X/official). Round 4: feasibility probe (numpy port + fixtures) and direction selection in dialogue with the user. All web-derived claims carry inline sources; fetch-blocked sources are marked and cross-verified rather than silently trusted.
+
+## 10. Outcomes (2026-10-24)
+
+Milestones 1 and 2 were executed against the direction locked in §6 and are closed; the public synthesis is `WRITEUP.md`. Every number in this section is captured from a committed artifact by `sim/build_writeup_numbers.py` (fixture `results/writeup_numbers.json`, guarded by `tests/test_writeup_numbers.py`) — none is retyped from chat memory.
+
+**M1 — anchor-table replay.** Emission convention adjudicated from upstream code: the engine emits **k+1** tokens per verification step (accepted prefix plus the final fresh row), encoded as `EMIT_BONUS = 1`; the Q&A accepted-length statistic is frozen as the mean accepted draft count k. The generator calibrates to the table's own fixed-5 column: accepted length in [3.29, 3.32] at every concurrency, mean 3.3042 (seed 20261022, horizon 6000). The selection row reproduces in sign and magnitude — -1.60% [-1.62, -1.59] against the published -1.5% at conc 16, where dynamic verifies 4.438 tokens per sequence and accepts 3.196 against fixed-5's 3.307 — while all five scoring rows fail in the same direction. The binding quantity is the dynamic accepted length: the published ladder peaks at +11.0% at conc 96, where under matched budget the published ratio is 3.15/3.24 = 0.9722 and the calibrated generator reaches 2.656/3.240 = 0.8198. Over the committed sign map (75 t_pow cost points and 30 saturation points) the concurrency-16 zero-crossing lies above the concurrency-32 one at every exponent tested, so the anchor's sign ladder and its conc-16 magnitude are JOINTLY irreproducible — a structural property of the flip-curve geometry, not a tuning miss. Where the pattern is reachable at all, conc-16 lands at -0.05% to -0.37%.
+
+**M2 — rank sufficiency.** Ranking-only noise applied in rate space over 1440 paired sims. Reachable band: a probability-constrained head's window-length concordance cannot fall below its plateau — V1 0.232-0.287, V2E 0.190-0.243, floor ~0.19-0.29 — so reachable ranking quality is the band [plateau, 1] and "scrambled" does not mean tau_K = 0. The auditable bound, stating the concordance needed to keep >= 50% of the ideal-band gain, is hierarchical: stable regime V1 [0.441, 0.453] and V2E [0.392, 0.404], with named exceptions V1 conc-32 = 0.734 (DEGENERATE: its ideal gain +0.16% halves within the first noise step), V2E conc-32 = 0.545 (ideal gain +4.38%), V2E conc-16 = 0.444, and second-regime conc-96 = 0.331 for V1 and 0.284 for V2E. The two generators differ row by row: only the two conc-32 rows reach 6.7-27.4x on ideal gain, every other positive row is 1.4-2.1x. Non-monotonicity is recorded rather than smoothed away: 24 FINDING cells (18 V1 + 6 V2E), all at sigma 6.4 -> 12.8.
+
+**Tension attribution.** Under a near-ideal head the conc-96 accepted/verified ratios are anchor 0.9722, V1 0.8198, V2E 0.8747: adopting the sharper-separation generator closed 0.0549 of the 0.1524 gap = 36.0%, leaving a residual 64.0% attributed to rate separation and the depth profile. Conc-16 stays unresolved in the same direction — the anchor's -1.5% sits below V1 -0.05% and V2E +1.90%. Ranking quality is necessary but not sufficient.
+
+**Reproducibility.** Generator seed 20261022, horizon 6000 steps; paired seeds `L2_SWEEP_SEED + i` for i in [0, 12); bootstrap seed 20261101, 10000 resamples. The M1 slice was frozen at commit `c842e85` before scoring and Milestone 2 closed at `be55c16`; the upstream evidence clone stayed at `9bd9cf2` and was never edited. The fast suite and the `-m slow` pin both pass, with durations recorded in `RESULTS_LEDGER.md`.
+
+**Artifacts.** `results/m1_report.md`, `results/m2_report.md`, `results/sweep_l2.md`, `results/sweep_m2.md`; conventions in `sim/convention.md`; the guard fixture in `results/writeup_numbers.json`.
+
+**Evidence boundary.** Published Q&A figures are claims, not ground truth; the simulator reads current-step true rates through an idealized head on a steady batch, so every dynamic gain reported here is an upper bound; and the threshold tables are conditioned on one noise realization per batch geometry. See §5 of each milestone report for the full statement.
