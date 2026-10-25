@@ -35,6 +35,8 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 ARTIFACTS = {
     "m1": REPO_ROOT / "results" / "m1_report.md",
     "m2": REPO_ROOT / "results" / "m2_report.md",
+    "sweep": REPO_ROOT / "results" / "sweep_m2.md",
+    "sweep_code": REPO_ROOT / "sim" / "sweep_m2.py",
     "ledger": REPO_ROOT / "RESULTS_LEDGER.md",
 }
 OUT_PATH = REPO_ROOT / "results" / "writeup_numbers.json"
@@ -117,6 +119,11 @@ LOCATORS: tuple[Locator, ...] = (
             kind="context", multi=True),
     # ---- M2 machinery + reachable band -----------------------------------
     Locator("m2_sims", "m2", None, r"(1440 paired sims)", kind="context"),
+    Locator("m2_slice_semantics", "sweep", None,
+            r"(one shared simulation set, gains are analytic transforms)", kind="context"),
+    Locator("m2_run_math", "sweep_code", None,
+            r"(2 generators x 6 concs x 10 sigmas x 12 seeds paired sims "
+            r"\(1440 runs\))", kind="context"),
     Locator("m2_title", "m2", None, r"(Milestone 2 report)", kind="context"),
     Locator("plateau_v1_lo", "m2", M2_S2, r"V1 plateaus at ([\d.]+)-", tier2=r"V1"),
     Locator("plateau_v1_hi", "m2", M2_S2, r"V1 plateaus at [\d.]+-([\d.]+)"),
@@ -174,9 +181,13 @@ LOCATORS: tuple[Locator, ...] = (
 # must go red).
 EXEMPTIONS: tuple[dict, ...] = (
     {"token": "4.1", "reason": "product identifier inside the model name V4.1-Flash "
-                               "(research_DeepInfer_20261022.md \u00a77 sources)"},
-    {"token": "2.0", "reason": "license identifier Apache-2.0 (upstream README, \u00a77 sources)"},
+                               "(research_DeepInfer_20261022.md §7 sources)"},
+    {"token": "2.0", "reason": "license identifier Apache-2.0 (upstream README, §7 sources)"},
 )
+
+
+class LocatorError(RuntimeError):
+    """A locator's scoping heading is absent from its artifact."""
 
 
 def _scope(text: str, heading: str | None) -> str:
@@ -184,7 +195,8 @@ def _scope(text: str, heading: str | None) -> str:
     if heading is None:
         end = next((i for i, ln in enumerate(lines) if ln.startswith("## ")), len(lines))
         return "\n".join(lines[:end])
-    assert heading in lines, f"heading not present in artifact: {heading!r}"
+    if heading not in lines:
+        raise LocatorError(f"heading not present in artifact: {heading!r}")
     start = lines.index(heading)
     end = next((i for i in range(start + 1, len(lines)) if lines[i].startswith("## ")), len(lines))
     return "\n".join(lines[start:end])
@@ -207,7 +219,7 @@ def derive() -> tuple[list[dict], list[str]]:
     for loc in LOCATORS:
         try:
             region = _scope(texts[loc.artifact], loc.heading)
-        except AssertionError as exc:
+        except LocatorError as exc:
             failures.append(f"<FAILED locator {loc.key}: {exc}>")
             continue
         if loc.multi:
@@ -243,8 +255,6 @@ def allow_list(entries: list[dict]) -> set[str]:
     return {t for e in entries for t in e["tokens"]} | {x["token"] for x in EXEMPTIONS}
 
 
-def scan_tokens(text: str) -> set[str]:
-    return set(TOKEN_RE.findall(strip_structural(text)))
 
 
 def build(write: bool = True) -> list[dict]:

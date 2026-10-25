@@ -111,8 +111,9 @@ slice selection rather than from the report.
 Milestone 1 makes ranking quality the load-bearing variable. Milestone 2 measures it. The
 machinery perturbs only the allocator's *ranking input* — multiplicative lognormal noise in
 rate space, `r' = clip(r * exp(sigma * z))` — while acceptance always samples the true rates
-over the winning prefix. 1440 paired sims across two generators, six concurrencies, ten
-noise levels, and three cost slices.
+over the winning prefix. 1440 paired sims = 2 generators x 6 concurrencies x 10 noise
+levels x 12 seeds; the three cost slices are analytic transforms of that one shared run
+set, not additional runs.
 
 Two things fall out that a laptop audit could not have asked for in advance.
 

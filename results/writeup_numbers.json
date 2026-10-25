@@ -440,6 +440,34 @@
       "tier2": null
     },
     {
+      "key": "m2_slice_semantics",
+      "kind": "context",
+      "printed": "one shared simulation set, gains are analytic transforms",
+      "tokens": [],
+      "artifact": "sweep",
+      "artifact_path": "results/sweep_m2.md",
+      "heading": null,
+      "pattern": "(one shared simulation set, gains are analytic transforms)",
+      "tier2": null
+    },
+    {
+      "key": "m2_run_math",
+      "kind": "context",
+      "printed": "2 generators x 6 concs x 10 sigmas x 12 seeds paired sims (1440 runs)",
+      "tokens": [
+        "10",
+        "12",
+        "1440",
+        "2",
+        "6"
+      ],
+      "artifact": "sweep_code",
+      "artifact_path": "sim/sweep_m2.py",
+      "heading": null,
+      "pattern": "(2 generators x 6 concs x 10 sigmas x 12 seeds paired sims \\(1440 runs\\))",
+      "tier2": null
+    },
+    {
       "key": "m2_title",
       "kind": "context",
       "printed": "Milestone 2 report",
