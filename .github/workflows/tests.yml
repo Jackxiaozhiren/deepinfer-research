@@ -1,0 +1,44 @@
+name: tests
+
+# Badged lane. It runs only the checks whose result cannot depend on the
+# platform's libm: the prose number census (string work over committed
+# artifacts), the emission-convention constants, and the allocator port's
+# integer fixtures. A green badge therefore means exactly two things: the
+# published numbers are still welded to the artifacts, and the conventions
+# read from upstream code have not drifted.
+#
+# Deliberately NOT here: tests/test_m2_report.py and the slow pins compare
+# aggregated floats against literals (e.g. 0.9722 at 4 decimal places).
+# Cross-platform equality of those last digits is not claimed anywhere in this
+# repository, so this lane does not assert it either - see full-suite.yml.
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  guards:
+    name: number audit and engine conventions
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install the only two dependencies the study allows
+        run: python -m pip install --disable-pip-version-check numpy==2.5.4 pytest==9.1.1
+
+      - name: Allocator port and its hand-derived fixtures
+        run: python dflash_alloc.py
+
+      - name: Numeric census over every published prose surface, plus the emission convention
+        run: python -m pytest -q --durations=10 tests/test_writeup_numbers.py tests/test_convention.py

@@ -1,0 +1,41 @@
+name: full-suite
+
+# Evidence lane, not a gate. Run it by hand from the Actions tab
+# (workflow_dispatch) when the question is "do these floating-point pins hold
+# on a different libc?" - the platform-independent guards live in tests.yml and
+# carry the badge; this workflow carries no badge and nothing requires it.
+#
+# It runs the whole fast suite plus the slow bit-identity pin. Both compare
+# aggregated simulator outputs against literals committed from an Apple-silicon
+# run, so a red here is a finding about platform reproducibility, not a
+# regression to tune away.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cross-platform-float-evidence:
+    name: entire suite on a Linux runner
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install the pinned dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.5.4 pytest==9.1.1
+
+      - name: Record the interpreter and dependency build actually used
+        run: python -c "import sys, platform, numpy, pytest; print(sys.version); print(platform.platform()); print(numpy.__version__, pytest.__version__)"
+
+      - name: Fast suite
+        run: python -m pytest -q --durations=10
+
+      - name: Slow full-scale pins
+        run: python -m pytest -q -m slow --durations=5
