@@ -13,7 +13,11 @@
       "artifact_path": "results/m1_report.md",
       "heading": "## 1. Convention derivation summary",
       "pattern": "emits \\*\\*(k\\+1)\\*\\* tokens",
-      "tier2": "EMIT_BONUS|accepted prefix|bonus"
+      "tier2": "EMIT_BONUS|accepted prefix|bonus",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "calib_mean",
@@ -26,7 +30,11 @@
       "artifact_path": "results/m1_report.md",
       "heading": "## 2. Calibration table",
       "pattern": "mean = (\\d+(?:\\.\\d+)?)",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "anchor_gain16",
@@ -39,7 +47,13 @@
       "artifact_path": "results/m1_report.md",
       "heading": "## 3. Replay table (frozen slice)",
       "pattern": "^\\| 16 \\| ([-+][\\d.]+%)",
-      "tier2": "conc\\S* ?16|\\banchor\\b"
+      "tier2": "conc\\S* ?16|\\banchor\\b",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section",
+        "README.md",
+        "release_v1.0.0.md"
+      ]
     },
     {
       "key": "anchor_gain96",
@@ -52,7 +66,13 @@
       "artifact_path": "results/m1_report.md",
       "heading": "## 3. Replay table (frozen slice)",
       "pattern": "^\\| 96 \\| ([-+][\\d.]+%)",
-      "tier2": "conc\\S* ?96"
+      "tier2": "conc\\S* ?96",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section",
+        "README.md",
+        "release_v1.0.0.md"
+      ]
     },
     {
       "key": "model_gain16",
@@ -65,7 +85,11 @@
       "artifact_path": "results/m1_report.md",
       "heading": "## 3. Replay table (frozen slice)",
       "pattern": "^\\| 16 \\| [-+][\\d.]+% \\| - \\| ([-+][\\d.]+%) \\[",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "anchor_ratio96",
@@ -78,7 +102,11 @@
       "artifact_path": "results/m1_report.md",
       "heading": "## 3. Replay table (frozen slice)",
       "pattern": "= (0\\.9722)",
-      "tier2": "3\\.15/3\\.24"
+      "tier2": "3\\.15/3\\.24",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "model_ratio_v1",
@@ -91,7 +119,11 @@
       "artifact_path": "results/m1_report.md",
       "heading": "## 3. Replay table (frozen slice)",
       "pattern": "= (0\\.8198)",
-      "tier2": "V1"
+      "tier2": "V1",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "calib_band_lo",
@@ -104,7 +136,11 @@
       "artifact_path": "results/m1_report.md",
       "heading": "## 2. Calibration table",
       "pattern": "mean across rows in \\[([\\d.]+),",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "calib_band_hi",
@@ -117,7 +153,11 @@
       "artifact_path": "results/m1_report.md",
       "heading": "## 2. Calibration table",
       "pattern": "mean across rows in \\[[\\d.]+, ([\\d.]+)\\]",
-      "tier2": "calibrat|fixed-5"
+      "tier2": "calibrat|fixed-5",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "gen_verified_dyn16",
@@ -130,7 +170,11 @@
       "artifact_path": "results/m1_report.md",
       "heading": "## 3. Replay table (frozen slice)",
       "pattern": "^\\| 16 \\|.*\\| ([\\d.]+) \\| [\\d.]+ / [\\d.]+ \\|",
-      "tier2": "verif"
+      "tier2": "verif",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "gen_acc_dyn16",
@@ -143,7 +187,11 @@
       "artifact_path": "results/m1_report.md",
       "heading": "## 3. Replay table (frozen slice)",
       "pattern": "^\\| 16 \\|.*\\| [\\d.]+ \\| ([\\d.]+) / ",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "gen_acc_fix16",
@@ -156,7 +204,11 @@
       "artifact_path": "results/m1_report.md",
       "heading": "## 3. Replay table (frozen slice)",
       "pattern": "^\\| 16 \\|.*\\| [\\d.]+ / ([\\d.]+) \\|",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "model_ci16",
@@ -170,7 +222,11 @@
       "artifact_path": "results/m1_report.md",
       "heading": "## 3. Replay table (frozen slice)",
       "pattern": "-1\\.60% (\\[-1\\.62, -1\\.59\\])",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "conc16_inband_lo",
@@ -183,7 +239,13 @@
       "artifact_path": "results/m1_report.md",
       "heading": "## 4. Sensitivity summary — where the family reproduces the anchor's sign flip",
       "pattern": "conc-16 lands at ([-\\d.]+%) to",
-      "tier2": "conc\\S* ?16"
+      "tier2": "conc\\S* ?16",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section",
+        "README.md",
+        "release_v1.0.0.md"
+      ]
     },
     {
       "key": "conc16_inband_hi",
@@ -196,7 +258,13 @@
       "artifact_path": "results/m1_report.md",
       "heading": "## 4. Sensitivity summary — where the family reproduces the anchor's sign flip",
       "pattern": "conc-16 lands at [-\\d.]+% to ([-\\d.]+%)",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section",
+        "README.md",
+        "release_v1.0.0.md"
+      ]
     },
     {
       "key": "l2_tpow_points",
@@ -209,7 +277,13 @@
       "artifact_path": "results/m1_report.md",
       "heading": "## 4. Sensitivity summary — where the family reproduces the anchor's sign flip",
       "pattern": "evaluates (\\d+) t_pow cost points",
-      "tier2": "t_pow"
+      "tier2": "t_pow",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section",
+        "README.md",
+        "release_v1.0.0.md"
+      ]
     },
     {
       "key": "l2_sat_points",
@@ -222,7 +296,13 @@
       "artifact_path": "results/m1_report.md",
       "heading": "## 4. Sensitivity summary — where the family reproduces the anchor's sign flip",
       "pattern": "and (\\d+) saturation points",
-      "tier2": "saturation"
+      "tier2": "saturation",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section",
+        "README.md",
+        "release_v1.0.0.md"
+      ]
     },
     {
       "key": "seed_gen",
@@ -236,7 +316,12 @@
       "artifact_path": "results/m1_report.md",
       "heading": "## 2. Calibration table",
       "pattern": "(seed 20261022,\\s*horizon 6000)",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section",
+        "README.md"
+      ]
     },
     {
       "key": "seed_bootstrap",
@@ -251,7 +336,11 @@
       "artifact_path": "results/m1_report.md",
       "heading": null,
       "pattern": "(bootstrap seed 20261101, 10000 resamples; horizon 6000 steps)",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "seed_i",
@@ -265,7 +354,11 @@
       "artifact_path": "results/m1_report.md",
       "heading": null,
       "pattern": "(i in \\[0, 12\\))",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "m1_title",
@@ -278,7 +371,11 @@
       "artifact_path": "results/m1_report.md",
       "heading": null,
       "pattern": "(Milestone 1 report)",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "fixed5",
@@ -291,7 +388,11 @@
       "artifact_path": "results/m1_report.md",
       "heading": "## 2. Calibration table",
       "pattern": "(Fixed-5 accepted length k per concurrency row)",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "l2_counts_ctx",
@@ -308,7 +409,11 @@
       "artifact_path": "results/m1_report.md",
       "heading": "## 4. Sensitivity summary — where the family reproduces the anchor's sign flip",
       "pattern": "\\(15 a/b values x 5 exponents\\) and 30 saturation points \\(10 x 3\\)",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "repro_cells",
@@ -326,7 +431,11 @@
       "artifact_path": "results/m1_report.md",
       "heading": "## 4. Sensitivity summary — where the family reproduces the anchor's sign flip",
       "pattern": "\\(\\(465\\.0, 1\\.1\\),\\s*\\(1550\\.0, 1\\.3\\), \\(4900\\.0, 1\\.5\\)",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "replay_concs",
@@ -344,7 +453,11 @@
       "artifact_path": "results/m1_report.md",
       "heading": "## 3. Replay table (frozen slice)",
       "pattern": "^\\| (16|32|48|60|72|96) \\|",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "replay_rows",
@@ -400,7 +513,11 @@
       "artifact_path": "results/m1_report.md",
       "heading": "## 3. Replay table (frozen slice)",
       "pattern": "^\\| (?:16|32|48|60|72|96) \\| .*\\|$",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "calib_rows",
@@ -424,7 +541,11 @@
       "artifact_path": "results/m1_report.md",
       "heading": "## 2. Calibration table",
       "pattern": "^\\| (16|32|48|60|72|96) \\| ([\\d.]+) \\|",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "m2_sims",
@@ -437,7 +558,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": null,
       "pattern": "(1440 paired sims)",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "m2_slice_semantics",
@@ -448,7 +573,11 @@
       "artifact_path": "results/sweep_m2.md",
       "heading": null,
       "pattern": "(one shared simulation set, gains are analytic transforms)",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "m2_run_math",
@@ -465,7 +594,11 @@
       "artifact_path": "sim/sweep_m2.py",
       "heading": null,
       "pattern": "(2 generators x 6 concs x 10 sigmas x 12 seeds paired sims \\(1440 runs\\))",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "m2_title",
@@ -478,7 +611,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": null,
       "pattern": "(Milestone 2 report)",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "plateau_v1_lo",
@@ -491,7 +628,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 2. Machinery, window-length semantics, and the reachable ranking-quality band",
       "pattern": "V1 plateaus at ([\\d.]+)-",
-      "tier2": "V1"
+      "tier2": "V1",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "plateau_v1_hi",
@@ -504,7 +645,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 2. Machinery, window-length semantics, and the reachable ranking-quality band",
       "pattern": "V1 plateaus at [\\d.]+-([\\d.]+)",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "plateau_v2e_lo",
@@ -517,7 +662,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 2. Machinery, window-length semantics, and the reachable ranking-quality band",
       "pattern": "V2E at ([\\d.]+)-",
-      "tier2": "V2E"
+      "tier2": "V2E",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "plateau_v2e_hi",
@@ -530,7 +679,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 2. Machinery, window-length semantics, and the reachable ranking-quality band",
       "pattern": "V2E at [\\d.]+-([\\d.]+)",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "floor_band",
@@ -544,7 +697,13 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 5. What this does NOT prove",
       "pattern": "tau_K floor \\((~[\\d.]+-[\\d.]+)\\)",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section",
+        "README.md",
+        "release_v1.0.0.md"
+      ]
     },
     {
       "key": "finding_cells",
@@ -557,7 +716,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
       "pattern": "\\*\\*(\\d+) FINDING cells",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "finding_split",
@@ -573,7 +736,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
       "pattern": "\\((\\d+ V1 \\+ \\d+ V2E)\\)",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "finding_sigma",
@@ -587,7 +754,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
       "pattern": "(sigma 6\\.4 -> 12\\.8)",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "tauhalf_v1_lo",
@@ -600,7 +771,13 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
       "pattern": "\\*\\*V1 \\[([\\d.]+),",
-      "tier2": "V1"
+      "tier2": "V1",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section",
+        "README.md",
+        "release_v1.0.0.md"
+      ]
     },
     {
       "key": "tauhalf_v1_hi",
@@ -613,7 +790,13 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
       "pattern": "\\*\\*V1 \\[[\\d.]+, ([\\d.]+)\\]\\*\\*",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section",
+        "README.md",
+        "release_v1.0.0.md"
+      ]
     },
     {
       "key": "tauhalf_v2e_lo",
@@ -626,7 +809,13 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
       "pattern": "\\*\\*V2E \\[([\\d.]+),",
-      "tier2": "V2E"
+      "tier2": "V2E",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section",
+        "README.md",
+        "release_v1.0.0.md"
+      ]
     },
     {
       "key": "tauhalf_v2e_hi",
@@ -639,7 +828,13 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
       "pattern": "\\*\\*V2E \\[[\\d.]+, ([\\d.]+)\\]\\*\\*",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section",
+        "README.md",
+        "release_v1.0.0.md"
+      ]
     },
     {
       "key": "tauhalf_v2e_conc32",
@@ -652,7 +847,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
       "pattern": "V2E conc-32 .*?tau_half = ([\\d.]+)",
-      "tier2": "conc\\S* ?32"
+      "tier2": "conc\\S* ?32",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "tauhalf_v1_conc32",
@@ -665,7 +864,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
       "pattern": "V1 conc-32 \\(primary/band-edge\\): tau_half = ([\\d.]+)",
-      "tier2": "DEGENERATE|degenerate"
+      "tier2": "DEGENERATE|degenerate",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "ideal_gain_v2e_conc32",
@@ -678,7 +881,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
       "pattern": "V2E conc-32 .*?larger ideal gain (\\+[\\d.]+%)",
-      "tier2": "V2E"
+      "tier2": "V2E",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "ideal_gain_v1_conc32",
@@ -691,7 +898,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
       "pattern": "V1 conc-32 .*?DEGENERATE: ideal gain (\\+[\\d.]+%)",
-      "tier2": "V1"
+      "tier2": "V1",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "tauhalf_v2e_conc16",
@@ -704,7 +915,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
       "pattern": "V2E conc-16 \\(all slices\\): tau_half = ([\\d.]+)",
-      "tier2": "conc\\S* ?16"
+      "tier2": "conc\\S* ?16",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "tauhalf_second_v1",
@@ -717,7 +932,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
       "pattern": "V1 conc-96 \\(second regime\\): tau_half = ([\\d.]+)",
-      "tier2": "V1"
+      "tier2": "V1",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "tauhalf_second_v2e",
@@ -730,7 +949,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
       "pattern": "V2E conc-96 \\(second regime\\): tau_half = ([\\d.]+)",
-      "tier2": "V2E"
+      "tier2": "V2E",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "mult_lo",
@@ -744,7 +967,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
       "pattern": "only the two conc-32 rows reach ([\\d.-]+x)",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "mult_hi_band",
@@ -758,7 +985,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
       "pattern": "every other row is ([\\d.-]+x)",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "m2_concs",
@@ -775,7 +1006,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
       "pattern": "conc (\\d+)",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "second_regime_gains",
@@ -793,7 +1028,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 3. Curves and thresholds (all counts parsed from results/sweep_m2.md)",
       "pattern": "(second conc 96: V2E \\+20\\.25% vs V1 \\+14\\.64% = 1\\.4x)",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "model_ratio_v2e",
@@ -806,7 +1045,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 4. M1-tension diagnosis — does ranking quality close the gap?",
       "pattern": "V2E = (0\\.8747)",
-      "tier2": "V2E"
+      "tier2": "V2E",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "closure_gap_part",
@@ -819,7 +1062,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 4. M1-tension diagnosis — does ranking quality close the gap?",
       "pattern": "closed (0\\.\\d+) of the",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "closure_gap_total",
@@ -832,7 +1079,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 4. M1-tension diagnosis — does ranking quality close the gap?",
       "pattern": "of the (0\\.\\d+) gap",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "closure_pct",
@@ -845,7 +1096,13 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 4. M1-tension diagnosis — does ranking quality close the gap?",
       "pattern": "gap = \\*\\*(36\\.0%)\\*\\*",
-      "tier2": "V2E"
+      "tier2": "V2E",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section",
+        "README.md",
+        "release_v1.0.0.md"
+      ]
     },
     {
       "key": "residual_pct",
@@ -858,7 +1115,13 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 4. M1-tension diagnosis — does ranking quality close the gap?",
       "pattern": "the residual (64\\.0%)",
-      "tier2": "36\\.0%|residual"
+      "tier2": "36\\.0%|residual",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section",
+        "README.md",
+        "release_v1.0.0.md"
+      ]
     },
     {
       "key": "tension_anchor_pair",
@@ -872,7 +1135,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 4. M1-tension diagnosis — does ranking quality close the gap?",
       "pattern": "(3\\.15/3\\.24)",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "tension_ideal_accept",
@@ -885,7 +1152,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 4. M1-tension diagnosis — does ranking quality close the gap?",
       "pattern": "(accepting at ~0\\.87 of the verified length)",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "conc16_v1",
@@ -898,7 +1169,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 4. M1-tension diagnosis — does ranking quality close the gap?",
       "pattern": "V1 ([-+][\\d.]+%) and",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "conc16_v2e",
@@ -911,7 +1186,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 4. M1-tension diagnosis — does ranking quality close the gap?",
       "pattern": "and V2E (\\+[\\d.]+%)",
-      "tier2": "V2E"
+      "tier2": "V2E",
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "retention_def",
@@ -924,7 +1203,13 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 5. What this does NOT prove",
       "pattern": "retaining >= (\\d+%)",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section",
+        "README.md",
+        "release_v1.0.0.md"
+      ]
     },
     {
       "key": "realization_claim",
@@ -935,7 +1220,11 @@
       "artifact_path": "results/m2_report.md",
       "heading": "## 5. What this does NOT prove",
       "pattern": "(ONE noise realization)",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "env_python",
@@ -948,7 +1237,11 @@
       "artifact_path": "RESULTS_LEDGER.md",
       "heading": "## 2026-10-24 — Milestone-S lane MS-L1 session start / §4 baseline capture (entry 15)",
       "pattern": "→ `(Python 3\\.12\\.14)`",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     },
     {
       "key": "env_versions",
@@ -962,7 +1255,11 @@
       "artifact_path": "RESULTS_LEDGER.md",
       "heading": "## 2026-10-24 — Milestone-S lane MS-L1 session start / §4 baseline capture (entry 15)",
       "pattern": "→ `(2\\.5\\.4 9\\.1\\.1)`",
-      "tier2": null
+      "tier2": null,
+      "surfaces": [
+        "WRITEUP.md",
+        "Outcomes section"
+      ]
     }
   ],
   "exemptions": [
@@ -973,6 +1270,18 @@
     {
       "token": "2.0",
       "reason": "license identifier Apache-2.0 (upstream README, §7 sources)"
+    },
+    {
+      "token": "1.0.0",
+      "reason": "the v1.0.0 release tag / CITATION.cff `version` field (this lane's deliverable 4, Ruling B)"
+    },
+    {
+      "token": "1.2.0",
+      "reason": "Citation Language Format `cff-version` (CITATION.cff, machine-readable metadata)"
+    },
+    {
+      "token": "2026",
+      "reason": "publication year in CITATION.cff `year`, matching the MIT copyright line in LICENSE"
     }
   ]
 }

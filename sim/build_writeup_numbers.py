@@ -10,10 +10,16 @@ A locator that stops matching fails loudly (N4): `<FAILED locator ...>` lines
 plus a nonzero exit, so a silently shrinking list is impossible.
 
 Entry kinds:
-  claim   - a headline number. G2 requires it verbatim in WRITEUP.md AND in the
-            report's Outcomes section; optional tier2 context (G4).
+  claim   - a headline number. G2 requires it verbatim in every prose surface the
+            locator declares; optional tier2 context (G4).
   context - an artifact clause that is not quoted in prose; its numeric tokens
             feed G3's allow-list only.
+
+Prose surfaces (lane R ruling A: the guard extends to every new prose surface):
+  WRITEUP.md, the report's Outcomes section, README.md, results/release_v1.0.0.md,
+  CITATION.cff.  Which claims a surface must carry is declared by key in
+  README_CLAIM_KEYS / RELEASE_CLAIM_KEYS; an unknown key fails loudly (N4), so a
+  renamed or dropped locator cannot silently un-publish a number.
 
 Division of labor (approved rulings 1-2 of this session):
   G2 proves a derived value APPEARS (completeness).
@@ -40,6 +46,54 @@ ARTIFACTS = {
     "ledger": REPO_ROOT / "RESULTS_LEDGER.md",
 }
 OUT_PATH = REPO_ROOT / "results" / "writeup_numbers.json"
+
+# --- prose surfaces (Ruling A) ---------------------------------------------
+# Every file whose Arabic-digit tokens the census polices. WRITEUP.md and the
+# report's Outcomes section are the MS-L1 pair; lane R registers three more.
+WRITEUP_PATH = REPO_ROOT / "WRITEUP.md"
+REPORT_PATH = REPO_ROOT / "research_DeepInfer_20261022.md"
+README_PATH = REPO_ROOT / "README.md"
+CITATION_PATH = REPO_ROOT / "CITATION.cff"
+RELEASE_PATH = REPO_ROOT / "results" / "release_v1.0.0.md"
+OUTCOMES_HEADING = "## 10. Outcomes (2026-10-24)"
+MS_SURFACES = ("WRITEUP.md", "Outcomes section")
+
+# Surfaces the token census polices but which publish no claim by design:
+# machine-readable citation metadata. tests/test_writeup_numbers.py requires every
+# other policed surface to declare at least one claim, so this list cannot absorb a
+# real number that someone wanted to keep off the hook; the citation surface's own
+# numbers are pinned to the EXEMPTIONS identifiers below.
+METADATA_SURFACES = frozenset({"CITATION.cff"})
+
+# Claims the front door must carry verbatim. Keys, not strings: the strings come
+# from the artifacts, so a renamed artifact value cannot be "kept" by editing a
+# list of literals.
+README_CLAIM_KEYS = frozenset({
+    "anchor_gain16", "anchor_gain96", "conc16_inband_lo", "conc16_inband_hi",
+    "retention_def", "tauhalf_v1_lo", "tauhalf_v1_hi",
+    "tauhalf_v2e_lo", "tauhalf_v2e_hi", "floor_band",
+    "closure_pct", "residual_pct",
+    "seed_gen", "l2_tpow_points", "l2_sat_points",
+})
+# The release body carries the three findings plus the reproduce fence read from
+# WRITEUP.md §6, so it requires no seed prose: seed_gen stays a README-only claim.
+RELEASE_CLAIM_KEYS = frozenset({
+    "anchor_gain16", "anchor_gain96", "conc16_inband_lo", "conc16_inband_hi",
+    "retention_def", "tauhalf_v1_lo", "tauhalf_v1_hi",
+    "tauhalf_v2e_lo", "tauhalf_v2e_hi", "floor_band",
+    "closure_pct", "residual_pct",
+    "l2_tpow_points", "l2_sat_points",
+})
+
+
+def surfaces_for(key: str) -> tuple[str, ...]:
+    declared = list(MS_SURFACES)
+    if key in README_CLAIM_KEYS:
+        declared.append("README.md")
+    if key in RELEASE_CLAIM_KEYS:
+        declared.append("release_v1.0.0.md")
+    return tuple(declared)
+
 
 M1_S3 = "## 3. Replay table (frozen slice)"
 M1_S4 = "## 4. Sensitivity summary — where the family reproduces the anchor's sign flip"
@@ -76,7 +130,6 @@ class Locator:
     kind: str = "claim"          # claim | context
     tier2: str | None = None     # G4 context regex, required near the value
     multi: bool = False          # context: findall + join
-
 
 LOCATORS: tuple[Locator, ...] = (
     # ---- M1 convention + calibration -------------------------------------
@@ -183,6 +236,15 @@ EXEMPTIONS: tuple[dict, ...] = (
     {"token": "4.1", "reason": "product identifier inside the model name V4.1-Flash "
                                "(research_DeepInfer_20261022.md §7 sources)"},
     {"token": "2.0", "reason": "license identifier Apache-2.0 (upstream README, §7 sources)"},
+    # Lane R: CITATION.cff is a policed surface (Ruling A), and its machine-readable
+    # identifiers are structural, not claims. tests/test_writeup_numbers.py reddens
+    # any exemption whose token stops appearing, so these cannot quietly go stale.
+    {"token": "1.0.0", "reason": "the v1.0.0 release tag / CITATION.cff `version` field "
+                                 "(this lane's deliverable 4, Ruling B)"},
+    {"token": "1.2.0", "reason": "Citation Language Format `cff-version` "
+                                 "(CITATION.cff, machine-readable metadata)"},
+    {"token": "2026", "reason": "publication year in CITATION.cff `year`, matching the "
+                                "MIT copyright line in LICENSE"},
 )
 
 
@@ -247,12 +309,131 @@ def derive() -> tuple[list[dict], list[str]]:
             "heading": loc.heading,
             "pattern": loc.pattern,
             "tier2": loc.tier2,
+            "surfaces": list(surfaces_for(loc.key)),
         })
+    claim_keys = {e["key"] for e in entries if e["kind"] == "claim"}
+    for name, keys in (("README_CLAIM_KEYS", README_CLAIM_KEYS),
+                       ("RELEASE_CLAIM_KEYS", RELEASE_CLAIM_KEYS)):
+        orphans = sorted(k for k in keys if k not in claim_keys)
+        if orphans:
+            failures.append(f"<FAILED surface key {name}: no claim locator named "
+                            f"{orphans} — a declared front-door number must be a "
+                            "derived claim, not a context locator or a typo>")
     return entries, failures
 
 
 def allow_list(entries: list[dict]) -> set[str]:
     return {t for e in entries for t in e["tokens"]} | {x["token"] for x in EXEMPTIONS}
+
+
+class SurfaceError(RuntimeError):
+    """A registered prose surface is missing, or a shared block drifted."""
+
+
+def section(text: str, heading: str, name: str) -> str:
+    try:
+        return _scope(text, heading)
+    except LocatorError as exc:
+        raise SurfaceError(f"{name} does not carry {heading!r}") from exc
+
+
+def fence_after(body: str, name: str) -> str:
+    """First fenced code block in `body`, fences included.
+
+    Criterion: exactly one fence exists to share. Why: the reproduce block is
+    published on three surfaces (WRITEUP.md §6, README.md, the release body), and
+    Ruling B forbids re-typing it - it is read from the committed writeup here.
+    Flip: WRITEUP §6 losing its fence, or a second fence appearing before it.
+    """
+    parts = body.split("```")
+    if len(parts) < 3:
+        raise SurfaceError(f"{name}: no fenced block found to share")
+    return "```" + parts[1] + "```"
+
+
+def prose_surfaces() -> dict[str, str]:
+    """Raw text of every policed prose surface (Ruling A).
+
+    Criterion: all five registered surfaces exist, are readable, and the report
+    still carries the Outcomes heading.
+    Why: the census has to cover the whole published surface set. A surface that
+    silently disappeared would shrink the audit rather than report it (N4).
+    Flip: deleting or renaming any registered surface, or dropping the Outcomes
+    heading from research_DeepInfer_20261022.md.
+    """
+    surfaces = {
+        "WRITEUP.md": WRITEUP_PATH.read_text(encoding="utf-8"),
+        "README.md": README_PATH.read_text(encoding="utf-8"),
+        "CITATION.cff": CITATION_PATH.read_text(encoding="utf-8"),
+        "release_v1.0.0.md": RELEASE_PATH.read_text(encoding="utf-8"),
+    }
+    report = REPORT_PATH.read_text(encoding="utf-8")
+    surfaces["Outcomes section"] = section(report, OUTCOMES_HEADING,
+                                           REPORT_PATH.name)
+    return surfaces
+
+
+RELEASE_HEADINGS = "## v1.0.0 — the audited front door"
+RELEASE_TEMPLATE = """{headings}
+
+This release is the repository's front door: `README.md`, `CITATION.cff`, the CI
+guard lane, and the About/topics metadata. The research content did not change -
+the committed artifacts and the commits they were scored at are the same ones
+Milestone 1 and Milestone 2 closed against.
+
+### What the audit found
+
+- The published gain ladder ({anchor_gain16} at the anchor's concurrency 16 row,
+  climbing to {anchor_gain96} at concurrency 96) is not jointly reproducible inside
+  the cost family studied. Where the anchor's sign pattern is reachable at all,
+  this family's concurrency 16 row lands at {conc16_inband_lo} to
+  {conc16_inband_hi} - magnitude and signs cannot both be matched.
+- Ranking quality has a reachable floor, not a zero. Retaining >= {retention_def} of
+  the ideal-band gain needs window-length concordance tau_half in
+  [{tauhalf_v1_lo}, {tauhalf_v1_hi}] for the base generator (V1) and
+  [{tauhalf_v2e_lo}, {tauhalf_v2e_hi}] for the sharper-separation variant (V2E),
+  while the plateau band itself is {floor_band}.
+- A near-ideal head (V2E) closes {closure_pct} of the generator-versus-table
+  discrepancy; the residual {residual_pct} lives in the acceptance rates themselves,
+  not in the ranking.
+
+### Reproduce
+
+{reproduce}
+
+### Guarded prose surfaces
+
+`WRITEUP.md`, the Outcomes section of `research_DeepInfer_20261022.md`,
+`README.md`, this file, and `CITATION.cff` are census-tested by
+`tests/test_writeup_numbers.py`: a numeric token that is not captured from a
+committed artifact reddens the suite. This body was rendered by
+`sim/build_writeup_numbers.py` from `results/writeup_numbers.json`.
+"""
+
+
+def render_release_notes(entries: list[dict]) -> str:
+    """Render the release body from derived claim strings (Ruling B).
+
+    Criterion: every key in RELEASE_CLAIM_KEYS resolves to a derived entry, and
+    the shared reproduce fence is read from WRITEUP.md §6 rather than retyped.
+    Why: release notes are a published numeric surface; generating them keeps the
+    tag's numbers welded to the same artifacts the writeup quotes.
+    Flip: a renamed locator key, or WRITEUP §6 losing its fenced block.
+    """
+    by_key = {e["key"]: e for e in entries}
+    missing = sorted(k for k in RELEASE_CLAIM_KEYS if k not in by_key)
+    if missing:
+        raise SurfaceError(f"RELEASE_CLAIM_KEYS name no locator: {missing}")
+    writeup = WRITEUP_PATH.read_text(encoding="utf-8")
+    fence = fence_after(section(writeup, "## 6. Reproduce it yourself", "WRITEUP.md"),
+                        "WRITEUP.md §6")
+    values = {k: by_key[k]["printed"] for k in RELEASE_CLAIM_KEYS}
+    body = RELEASE_TEMPLATE.format(headings=RELEASE_HEADINGS, reproduce=fence, **values)
+    stray = re.findall(r"\{[a-z_0-9]+\}", body)
+    if stray:
+        raise SurfaceError(f"unresolved placeholders in the release body: {stray}")
+    return body
+
 
 
 
@@ -274,10 +455,16 @@ def build(write: bool = True) -> list[dict]:
         }
         OUT_PATH.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n",
                             encoding="utf-8")
+        notes = render_release_notes(entries)
+        RELEASE_PATH.write_text(notes, encoding="utf-8")
         n_claim = sum(1 for e in entries if e["kind"] == "claim")
+        n_readme = len(README_CLAIM_KEYS)
+        n_rel = len(RELEASE_CLAIM_KEYS)
         print(f"wrote {OUT_PATH.relative_to(REPO_ROOT)}: {len(entries)} entries "
               f"({n_claim} claims, {len(entries) - n_claim} context), "
               f"{len(allow_list(entries))} allowed tokens")
+        print(f"wrote {RELEASE_PATH.relative_to(REPO_ROOT)}: derived from "
+              f"{n_rel} claim keys (README.md declares {n_readme})")
     return entries
 
 

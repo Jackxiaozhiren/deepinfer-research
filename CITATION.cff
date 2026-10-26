@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this audit, please cite the repository."
+type: software
+title: "A published speculative-decoding speedup, audited on a laptop: DeepInfer DSpark confidence-scheduled verification"
+authors:
+  - name: "Zhiren Xiao"
+repository-code: "https://github.com/Jackxiaozhiren/deepinfer-research"
+abstract: "Seeded CPU-only simulation study of the confidence-scheduled verification allocator shipped by DeepSeek's DeepInfer, replaying the deployment Q&A's fixed-versus-dynamic serving table and bounding the ranking quality its gains require. Every number quoted in the repository's prose is captured from a committed artifact by a regex locator and census-tested in CI."
+keywords:
+  - speculative-decoding
+  - inference-scheduling
+  - reproducible-research
+  - confidence-head
+license: MIT
+year: 2026
+date-released: "2026-10-26"
+version: "1.0.0"
