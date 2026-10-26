@@ -5,7 +5,7 @@ DeepInfer's DSpark speculative decoding — numpy on Apple silicon: no GPU, no m
 weights, no tokenizer, no cluster.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Python 3.12.14](https://img.shields.io/badge/python-3.12.14-blue.svg)](WRITEUP.md)
+[![Python 3.12.14](https://img.shields.io/badge/python-3.12.14-blue.svg)](#quickstart)
 [![tests](https://github.com/Jackxiaozhiren/deepinfer-research/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/Jackxiaozhiren/deepinfer-research/actions/workflows/tests.yml)
 
 Read the audit in [WRITEUP.md](WRITEUP.md) · the code-level reading of the engine in
@@ -110,5 +110,6 @@ ledger `RESULTS_LEDGER.md`.
   interpreter re-ran the sign-map sweep, regenerated `results/sweep_l2.md` bit-identically,
   and left the working tree clean — the datum and its reproduction live in
   [RESULTS_LEDGER.md](RESULTS_LEDGER.md), not in a chat log.
-- **License:** MIT ([LICENSE](LICENSE)). Engine sources remain Apache-2.0 by
-  [deepseek-ai/DeepInfer](https://github.com/deepseek-ai/DeepInfer).
+- **License:** MIT ([LICENSE](LICENSE)). The engine this audit reads stays Apache-2.0
+  under [deepseek-ai/DeepInfer](https://github.com/deepseek-ai/DeepInfer); nothing here
+  is affiliated with or endorsed by them.
